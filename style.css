@@ -1,0 +1,38 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+table {
+  background-color: rgb(190, 64, 29);
+  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 10px;
+  table-layout: fixed;
+}
+
+td {
+  text-align: center;
+  background-color: rgb(236, 172, 34);
+  border-radius: 10px;
+  min-width: 50px;
+  min-height: 50px;
+  height: 50px;
+  width: 50px;
+}
+
+.emptyCell {
+  background-color: rgb(192, 153, 153);
+}
+
+.bigCell {
+  min-width: 125px;
+  min-height: 125px;
+  height: 125px;
+  width: 125px;
+  font-size: 80px;
+}
