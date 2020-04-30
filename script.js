@@ -137,7 +137,7 @@ window.addEventListener('keydown', function (event) {
   game.keyHandler(event.key);
 });
 window.addEventListener('click', function () {
-  game.funClickHandler();
+  //game.funClickHandler();
 });
 
 // Helper functions!
