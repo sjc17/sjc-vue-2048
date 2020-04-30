@@ -17,6 +17,28 @@ const game = new Vue({
     bigCells: function () {
       return this.dimensions < 6;
     },
+    displayGameArray: function () {
+      const display = [];
+      for (const row in this.gameArray) {
+        for (const col in this.gameArray[row]) {
+          display.push(this.gameArray[row][col]);
+        }
+      }
+      return display;
+    },
+    bgColors: {
+      2: 'khaki',
+      4: 'indianred',
+      8: 'paleturquoise',
+      16: 'yellowgreen',
+      32: 'steelblue',
+      64: 'hotpink',
+      128: 'darkgoldenrod',
+      256: 'lightsalmon',
+      512: 'tomato',
+      1024: 'plum',
+      2048: 'orangered',
+    },
   },
   methods: {
     // Start a new game with specified dimensions
@@ -96,6 +118,13 @@ const game = new Vue({
         return false;
       }
     },
+    funClickHandler: function () {
+      const ref = this.gameArray[0][0];
+      this.gameArray[0][0] = this.gameArray[0][1];
+      this.gameArray[0][1] = ref;
+      this.gameArray = [...this.gameArray];
+      console.log(this.gameArray);
+    },
   },
 });
 
@@ -106,6 +135,9 @@ game.newGame();
 window.addEventListener('keydown', function (event) {
   // Call app's key handling method, which will update game state for arrow key press
   game.keyHandler(event.key);
+});
+window.addEventListener('click', function () {
+  game.funClickHandler();
 });
 
 // Helper functions!

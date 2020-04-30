@@ -7,22 +7,26 @@ body {
   -webkit-user-select: none;
 }
 
-table {
+#game {
   background-color: rgb(190, 64, 29);
   border-radius: 10px;
-  border-collapse: separate;
-  border-spacing: 10px;
-  table-layout: fixed;
 }
 
-td {
+#game-container {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+}
+
+.game-cell {
   text-align: center;
-  background-color: rgb(236, 172, 34);
+  background-color: white;
   border-radius: 10px;
-  min-width: 50px;
-  min-height: 50px;
+  max-width: 50px;
+  max-height: 50px;
   height: 50px;
   width: 50px;
+  line-height: 50px;
 }
 
 .emptyCell {
@@ -30,9 +34,14 @@ td {
 }
 
 .bigCell {
-  min-width: 125px;
-  min-height: 125px;
+  max-width: 125px;
+  max-height: 125px;
   height: 125px;
   width: 125px;
-  font-size: 80px;
+  font-size: 55px;
+  line-height: 125px;
+}
+
+.array-list-move {
+  transition: all 200ms;
 }

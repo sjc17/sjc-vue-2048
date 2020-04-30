@@ -14,20 +14,26 @@
     <header>
       <h1>Vue 2048 - Steven Edition</h1>
     </header>
-    <table id="game">
-      <tbody>
-        <tr v-for="array in gameArray">
-          <td
-            v-for="el in array"
-            v-bind:class="{ emptyCell: !el.value, bigCell: bigCells()}"
-            :key="el.id"
-          >
-            {{el.value ? el.value : " "}}
-          </td>
-          <br />
-        </tr>
-      </tbody>
-    </table>
+    <div id="game">
+      <!-- grid-template-columns: 'repeat('+dimensions+', 1fr)' -->
+      <transition-group
+        tag="div"
+        id="game-container"
+        style="grid-template-columns: repeat(4, 1fr);"
+        v-bind:style="{}"
+        name="array-list"
+      >
+        <div
+          class="game-cell"
+          v-for="elem in displayGameArray()"
+          v-bind:class="{ emptyCell: !elem.value, bigCell: bigCells()}"
+          :style="{ backgroundColor: bgColors[elem.value] }"
+          :key="elem.id"
+        >
+          {{elem.value ? elem.value : " "}}
+        </div>
+      </transition-group>
+    </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="script.js"></script>
