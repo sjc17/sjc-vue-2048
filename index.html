@@ -34,6 +34,15 @@
         </div>
       </transition-group>
     </div>
+    <div id="game-over-box" v-if="visible">
+      <h2 id="msg-game-over">{{victory ? "You win!" : "You lose!"}}</h2>
+      <div class="btn-game-over" v-on:click="playAgain">
+        Play Again
+      </div>
+      <div class="btn-game-over" v-on:click="visible = false;" v-if="victory">
+        Continue
+      </div>
+    </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="script.js"></script>

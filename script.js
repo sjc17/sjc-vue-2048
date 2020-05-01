@@ -6,6 +6,20 @@ const directions = {
   right: 'ArrowRight',
 };
 
+const box = new Vue({
+  el: '#game-over-box',
+  data: {
+    visible: false,
+    victory: false,
+  },
+  methods: {
+    playAgain: function () {
+      this.visible = false;
+      game.newGame();
+    },
+  },
+});
+
 const game = new Vue({
   el: '#game',
   data: {
@@ -54,6 +68,7 @@ const game = new Vue({
 
       this.addRandomNumber();
       this.addRandomNumber();
+      box.victory = false;
     },
     // Handle keydown events
     keyHandler: function (keyValue) {
@@ -77,6 +92,15 @@ const game = new Vue({
       // Add a 2 or 4 randomly
       this.addRandomNumber();
 
+      if (!box.victory) {
+        this.gameArray.forEach((row) => {
+          row.forEach((cell) => {
+            if (cell.value == 2048) {
+              this.gameEnd(true);
+            }
+          });
+        });
+      }
       // No more moves available means game over
       if (
         !moveAvailable(directions.down, this.gameArray) &&
@@ -84,7 +108,7 @@ const game = new Vue({
         !moveAvailable(directions.left, this.gameArray) &&
         !moveAvailable(directions.right, this.gameArray)
       ) {
-        alert('Game Over!');
+        this.gameEnd(false);
       }
     },
     // Find an empty cell, and add a number to it (2 or 4)
@@ -118,12 +142,9 @@ const game = new Vue({
         return false;
       }
     },
-    funClickHandler: function () {
-      const ref = this.gameArray[0][0];
-      this.gameArray[0][0] = this.gameArray[0][1];
-      this.gameArray[0][1] = ref;
-      this.gameArray = [...this.gameArray];
-      console.log(this.gameArray);
+    gameEnd: function (victory) {
+      box.visible = true;
+      box.victory = victory;
     },
   },
 });
@@ -135,9 +156,6 @@ game.newGame();
 window.addEventListener('keydown', function (event) {
   // Call app's key handling method, which will update game state for arrow key press
   game.keyHandler(event.key);
-});
-window.addEventListener('click', function () {
-  //game.funClickHandler();
 });
 
 // Helper functions!
